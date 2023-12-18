@@ -9,10 +9,10 @@ Ombline
 -> Question 3
 Donatien
 
--> Question 4
+-> Question 4 ✅
 Ombline
 
--> Question 5
+-> Question 5 
 Ombline
 
 -> Question 6
@@ -26,3 +26,7 @@ Ombline
 
 -> Question 9
 Tous les deux
+
+
+Prochaine réunion : vendredi 22 décembre
+D'ici là : avancer voire finir ses questions respectives
