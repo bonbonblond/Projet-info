@@ -24,7 +24,7 @@ Donatien
 -> Question 7
 Donatien
 
--> Question 8
+-> Question 8 -> Il faut pas rajouter la justification qu'il s'agit bien d'un cycle oscillatoire là ?
 Ombline
 
 -> Question 9
