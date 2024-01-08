@@ -15,7 +15,7 @@ manque aussi la 2eme partie de la question (supprimer !pip install autograd dans
 -> Question 4 ✅
 Ombline
 
--> Question 5 😑 -> à rechercher !! définis la norme ou vérifie qu ec'est bien la même que celle que j'utilise à la question 1
+-> Question 5 reste à donner la méthode numérique mais idée est là
 Ombline
 
 -> Question 6 à rédiger
@@ -24,7 +24,7 @@ Donatien
 -> Question 7
 Donatien
 
--> Question 8 -> Il faut pas rajouter la justification qu'il s'agit bien d'un cycle oscillatoire là ?
+-> Question 8 -> Il faut pas rajouter la justification qu'il s'agit bien d'un cycle oscillatoire là ? non c'est bon
 Ombline
 
 -> Question 9
