@@ -4,7 +4,7 @@ a. fini
 b. facultatif ==> à regarder plus tard 👀
 
 Question 2 Ombline
-Partie 1 : ok
+Partie 1 : ✅
 Partie 2 : à regarder 👀 ❌
 
 Question 3 Donatien
@@ -12,7 +12,7 @@ Question 3 Donatien
 Question 4 Donatien
 
 II.
-Question 1 Ombline
+Question 1 Ombline ✅
 
 Question 2 absolument aucune Question
 
@@ -20,9 +20,9 @@ Question 3 Donatien
 
 Question 4 Donatien
 
-Question 5 Ombline
+Question 5 Ombline ✅
 
-Question 6 Ombline
+Question 6 Ombline en cours
 
 II.
 Question 1 Ombline
