@@ -1,0 +1,1 @@
+la définition spécifie à la fois comment le comptage est réparti spatialement et comment il est distribué dans le temps. Cela signifie que si nous connaissons l'intensité du processus θ, nous pouvons déterminer complètement le comportement du processus de Poisson dans l'espace et dans le temps.
