@@ -2,31 +2,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-# Create a figure and axis object
+# Création de la figure et de l'axe
 fig, ax = plt.subplots()
 xdata, ydata = [], []
-ln, = plt.plot([], [], 'r-', animated=True)
+ln, = plt.plot([], [], 'r.', animated=True)
 
-# Set axis limits
-ax.set_xlim(0, 2*np.pi)
-ax.set_ylim(-1, 1)
-
-# Initialization function: plot the background of each frame
+# Fonction d'initialisation de l'axe
 def init():
-    ln.set_data([], [])
+    ax.set_xlim(-5, 5)
+    ax.set_ylim(0, 0.5)
     return ln,
 
-# Animation function which updates the plot
+# Fonction de mise à jour du graphique à chaque frame
 def update(frame):
-    xdata.append(frame)
-    ydata.append(np.sin(frame))
-    ln.set_data(xdata, ydata)
+    x = np.random.normal(0, 1, 1000)  # Données aléatoires selon une loi normale
+    y, _ = np.histogram(x, bins=50, density=True)
+    x = (_[1:] + _[:-1]) / 2
+    ln.set_data(x, y)
     return ln,
 
-# Generate frames
-frames = np.linspace(0, 2*np.pi, 128)
-
-# Create the animation
-ani = FuncAnimation(fig, update, frames=frames, init_func=init, blit=True)
+# Création de l'animation
+ani = FuncAnimation(fig, update, frames=np.arange(0, 200), init_func=init, blit=True)
 
 plt.show()
