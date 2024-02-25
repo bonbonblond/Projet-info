@@ -76,11 +76,7 @@ def computeMinDist(X):
     n = np.shape(X)[0]
     dist = np.zeros(n)
     for i in range(n):
-        X_prive_de_i = X.tolist()
-        del X_prive_de_i[i]
-        X_prive_de_i = np.array(X_prive_de_i)
-        X_i = (n - 1) * [X[i, :2]]
-        dist[i] = np.min(np.linalg.norm(X_prive_de_i[:, :2] - X_i))
+        dist[i] = np.min(np.linalg.norm(np.delete(X, i, axis=0) - X[i], axis=1))
     return dist
 
 
@@ -207,9 +203,8 @@ im = ax.imshow(data[0], interpolation="nearest", cmap="Greens")
 
 
 # Fonction nécessaire à l'animation
-def animate(frame, matrices):
-    index = np.where(matrices == frame)
-    im = ax.imshow(matrices[index[1][1] + 1], interpolation="nearest", cmap="Greens")
+def animate(frames):
+    im = ax.imshow(frames, interpolation="nearest", cmap="Greens")
     return [im]
 
 
@@ -218,14 +213,24 @@ def init():
     return [im]
 
 
+def generate_frames(data, nbyears):
+    index = np.array([[0,0], [0, 0]])
+    frame = data[0]
+    while index[1][1] <= nbyears:
+        yield frame, data
+        index = np.where(data == frame)
+        frame = data[index[1][1] + 1]
+        print(frame)
+
+
 # Création de l'animation
 ani = FuncAnimation(
     fig,
     animate,
     init_func=init,
-    frames=data[0],
+    frames=generate_frames(data, nbyears),
     interval=1000,
     blit=True,
-    fargs=(data,),
+    cache_frame_data=False
 )
 plt.show()
