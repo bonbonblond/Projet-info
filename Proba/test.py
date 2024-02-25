@@ -1,15 +1,3 @@
-def computeMinDist(X):
-    n = np.shape(X)[0]
-    dist = np.zeros(n)
-    for i in range(n):
-        liste_distances = np.full(n, 0)
-        for j in range(len(X)):
-            if j != i:
-                liste_distances[j] = np.linalg.norm(X[j, :2] - X[i, :2])
-        dist[i] = np.min(liste_distances)
-    print(dist)
-    return dist
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -26,11 +14,6 @@ mu_1 = np.array([30, 20])
 mu_2 = np.array([80, 45])
 mu_3 = np.array([30, 70])
 
-alpha = 0.05
-a = 100
-b = 100
-f_max = (10**4) * sps.multivariate_normal.pdf(mu_3, mean=mu_3, cov=sigma_3)
-
 
 def topo(x):
     y1 = sps.multivariate_normal.pdf(x, mean=mu_1, cov=sigma_1)
@@ -38,6 +21,18 @@ def topo(x):
     y3 = sps.multivariate_normal.pdf(x, mean=mu_3, cov=sigma_3)
     y = (y1 + y2 + y3) * (10**4)
     return y
+
+
+a = 100
+b = 100
+f_max = (10**4) * sps.multivariate_normal.pdf(mu_3, mean=mu_3, cov=sigma_3)
+
+
+def alpha_find(x, y):
+    return f_max - topo([x, y])
+
+
+alpha = 500 / (integrate.dblquad(alpha_find, 0, a, 0, b)[0])
 
 
 def theta(x):
@@ -72,7 +67,7 @@ def poisson2(a, b):
 
 
 ## Growth after one year
-def height_1(b, d):
+def height_2(b, d):
     return np.random.exponential(1 / (4 + b / 2 + 2 * np.exp(-d)))
 
 
@@ -81,12 +76,11 @@ def computeMinDist(X):
     n = np.shape(X)[0]
     dist = np.zeros(n)
     for i in range(n):
-        X_prive_de_i = X
-        if i != 0:
-            X_prive_de_i[i] = X_prive_de_i[0]
-        else:
-            X_prive_de_i[i] = X_prive_de_i[-1]
-        dist[i] = np.min(np.linalg.norm(X_prive_de_i[:, :2] - X[i, :2]))
+        X_prive_de_i = X.tolist()
+        del X_prive_de_i[i]
+        X_prive_de_i = np.array(X_prive_de_i)
+        X_i = (n - 1) * [X[i, :2]]
+        dist[i] = np.min(np.linalg.norm(X_prive_de_i[:, :2] - X_i))
     return dist
 
 
@@ -131,7 +125,7 @@ def simForest_year_by_year(nbyears, lam, param, pmin):
         d = computeMinDist(X)
 
         ## Add heights
-        h_new = np.array([h[i] + height_1(b, d[i]) for i in range(len(h))])
+        h_new = np.array([h[i] + height_2(b, d[i]) for i in range(len(h))])
 
         ## Decimate
         if b:
@@ -187,7 +181,7 @@ def simForest_year_by_year(nbyears, lam, param, pmin):
 from matplotlib.animation import FuncAnimation
 
 # Création du jeu de données
-nbyears = 10  # on peut modifier cette valeur, ici on choisit 10 à cause du temps que prend le programme à tourner au dessus
+nbyears = 12  # on peut modifier cette valeur, ici on choisit 10 à cause du temps que prend le programme à tourner au dessus
 
 X, h = simForest_year_by_year(nbyears, lam, param, pmax)
 
@@ -213,12 +207,25 @@ im = ax.imshow(data[0], interpolation="nearest", cmap="Greens")
 
 
 # Fonction nécessaire à l'animation
-def update(frame, matrices):
+def animate(frame, matrices):
     index = np.where(matrices == frame)
-    im.set_data(matrices[index[1][1] + 1])
+    im = ax.imshow(matrices[index[1][1] + 1], interpolation="nearest", cmap="Greens")
+    return [im]
+
+
+def init():
+    im.set_array(data[0])
     return [im]
 
 
 # Création de l'animation
-ani = FuncAnimation(fig, update, frames=data[0], blit=True, fargs=(data,))
+ani = FuncAnimation(
+    fig,
+    animate,
+    init_func=init,
+    frames=data[0],
+    interval=1000,
+    blit=True,
+    fargs=(data,),
+)
 plt.show()
