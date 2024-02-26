@@ -214,7 +214,7 @@ def init():
 
 
 def generate_frames(data, nbyears):
-    index = np.array([[0,0], [0, 0]])
+    index = np.array([[0, 0], [0, 0]])
     frame = data[0]
     while index[1][1] <= nbyears:
         yield frame, data
@@ -231,6 +231,6 @@ ani = FuncAnimation(
     frames=generate_frames(data, nbyears),
     interval=1000,
     blit=True,
-    cache_frame_data=False
+    cache_frame_data=False,
 )
 plt.show()

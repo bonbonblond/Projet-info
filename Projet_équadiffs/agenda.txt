@@ -2,29 +2,26 @@ Distribution des questions :
 
 -> Question 1 
 Donatien
-!! on peut se donner une norme random on est d'accord ?
-Manque la 2eme partie de la question
 
 -> Question 2 ✅
 Ombline
 
 -> Question 3
 Donatien
-manque aussi la 2eme partie de la question (supprimer !pip install autograd dans la première cellule du notebook si on ne l'utilise pas finalement)
 
 -> Question 4 ✅
 Ombline
 
--> Question 5 reste à donner la méthode numérique mais idée est là
+-> Question 5 😑 -> à rechercher
 Ombline
 
--> Question 6 à rédiger
+-> Question 6
 Donatien
 
 -> Question 7
 Donatien
 
--> Question 8 -> Il faut pas rajouter la justification qu'il s'agit bien d'un cycle oscillatoire là ? non c'est bon
+-> Question 8
 Ombline
 
 -> Question 9
